@@ -6,7 +6,7 @@
 <title>Xyzaroom</title>
 
 <style>
-/* ================= GLOBAL STYLE ================= */
+/* ================= GLOBAL ================= */
 body, html {
     margin: 0;
     padding: 0;
@@ -26,6 +26,7 @@ body, html {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    transition: opacity 1s ease;
 }
 
 .cube {
@@ -33,23 +34,22 @@ body, html {
     height: 60px;
     position: relative;
     transform-style: preserve-3d;
-    animation: spin 2.8s infinite linear;
+    animation: spin 6s infinite linear;
 }
 
 .cube div {
     position: absolute;
     width: 60px;
     height: 60px;
-    background: rgba(255,255,255,0.15);
-    border: 2px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.28);
 }
 
-/* Cube faces */
 .cube .front  { transform: translateZ(30px); }
 .cube .back   { transform: rotateY(180deg) translateZ(30px); }
-.cube .right  { transform: rotateY(90deg)  translateZ(30px); }
+.cube .right  { transform: rotateY(90deg) translateZ(30px); }
 .cube .left   { transform: rotateY(-90deg) translateZ(30px); }
-.cube .top    { transform: rotateX(90deg)  translateZ(30px); }
+.cube .top    { transform: rotateX(90deg) translateZ(30px); }
 .cube .bottom { transform: rotateX(-90deg) translateZ(30px); }
 
 @keyframes spin {
@@ -57,29 +57,24 @@ body, html {
     to   { transform: rotateX(360deg) rotateY(360deg); }
 }
 
-/* Typing effect */
+/* Typing Effect */
 #typingText {
     margin-top: 25px;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     letter-spacing: 2px;
     color: #e0e0e0;
     border-right: 2px solid #fff;
     width: 0;
     white-space: nowrap;
     overflow: hidden;
-    animation: typing 3s steps(30) forwards, blink 0.7s infinite;
+    animation: typing 5.5s steps(40) forwards,
+               blink 0.85s infinite;
 }
 
-@keyframes typing {
-    from { width: 0; }
-    to   { width: 240px; }
-}
+@keyframes typing { from { width: 0; } to { width: 260px; } }
+@keyframes blink { 50% { border-color: transparent; } }
 
-@keyframes blink {
-    50% { border-color: transparent; }
-}
-
-/* ================= HEADER HERO ================= */
+/* ================= HERO ================= */
 .hero {
     position: relative;
     width: 100%;
@@ -91,136 +86,159 @@ body, html {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.35;
+    opacity: 0.38;
 }
 
 .hero .overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 60px;
+    inset: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.75));
+    padding: 80px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.82));
 }
 
 .hero h1 {
-    font-size: 3.8rem;
-    margin: 0;
+    font-size: 3.5rem;
     font-weight: bold;
+    margin: 0;
 }
 
 .hero p {
-    max-width: 450px;
-    font-size: 1.2rem;
-    line-height: 1.6em;
+    max-width: 480px;
+    font-size: 1.25rem;
+    line-height: 1.65em;
     margin-top: 20px;
-    color: #ddd;
+    color: #e0e0e0;
 }
 
-/* ================= ABOUT SECTION ================= */
+/* ===== RESPONSIVE HERO ===== */
+@media (max-width: 768px) {
+    .hero .overlay {
+        padding: 40px;
+    }
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+        max-width: 95%;
+    }
+}
+
+/* ================= ABOUT ================= */
 .about {
     padding: 80px 40px;
     background: #111;
 }
 
 .about h2 {
-    font-size: 2.7rem;
+    font-size: 2.6rem;
     margin-bottom: 25px;
-    color: #fff;
 }
 
 .about p {
-    font-size: 1.1rem;
-    max-width: 800px;
-    color: #ccc;
+    max-width: 780px;
     line-height: 1.7rem;
+    color: #ccc;
 }
 
 /* ================= FOOTER ================= */
 footer {
-    padding: 40px;
+    padding: 50px 20px;
     background: #0a0a0a;
+    color: #888;
     text-align: center;
-    color: #666;
     font-size: 0.9rem;
 }
 
-footer a {
+.footer-links {
+    margin-bottom: 25px;
+}
+
+.footer-links a {
     color: #888;
-    margin: 0 10px;
+    margin: 0 12px;
     text-decoration: none;
 }
-footer a:hover {
-    color: #fff;
+.footer-links a:hover { color: #fff; }
+
+footer a {
+    color: #888;
+    text-decoration: none;
 }
+footer a:hover { color: #fff; }
 </style>
 </head>
 
 <body>
 
-<!-- LOADING SCREEN -->
+<!-- LOADING -->
 <div id="loadingScreen">
     <div class="cube">
-        <div class="front"></div>
-        <div class="back"></div>
-        <div class="right"></div>
-        <div class="left"></div>
-        <div class="top"></div>
-        <div class="bottom"></div>
+        <div class="front"></div><div class="back"></div>
+        <div class="right"></div><div class="left"></div>
+        <div class="top"></div><div class="bottom"></div>
     </div>
-
     <div id="typingText">Xyzaroom Records</div>
 </div>
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <div class="hero">
     <video autoplay muted loop>
         <source src="https://archive.org/details/2025-11-09-1762698846886" type="video/mp4">
     </video>
-
     <div class="overlay">
         <h1>Music Distribution<br>For New Era Artists</h1>
         <p>
-            Independent label support, innovative release tools,  
-            and global publishing management — all tailored for modern creators.
+            Independent label support, innovative release tools,<br>
+            and global publishing management — all made for creators.
         </p>
     </div>
 </div>
 
-<!-- ABOUT SECTION -->
+<!-- ABOUT -->
 <div class="about">
     <h2>About</h2>
     <p>
-        Xyzaroom adalah layanan musik independen yang memberikan solusi  
-        untuk artist, producer, dan label dalam merilis musik ke seluruh dunia.  
-        Sistem kami dirancang futuristik, cepat, aman, dan memberikan kontrol penuh  
+        Xyzaroom adalah layanan musik independen yang memberikan solusi 
+        bagi artist, producer, dan label dalam merilis musik ke seluruh dunia.  
+        Platform kami futuristik, cepat, aman, dan memberikan kontrol penuh  
         pada setiap tahap distribusi.
     </p>
 </div>
 
 <!-- FOOTER -->
 <footer>
-    <a href="#">Privacy Policy</a> | 
+
+    <!-- NEW 8 LINKS AREA -->
+    <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Artists</a>
+        <a href="#">Releases</a>
+        <a href="#">Publishing</a>
+        <a href="#">Partners</a>
+        <a href="#">Support</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <a href="#">Privacy Policy</a> |
     <a href="#">Terms & Conditions</a>
-    <br><br>© 2025 Xyzaroom Records
+    <br><br>
+    © 2025 Xyzaroom Records
 </footer>
 
 <script>
-/* Remove loading screen after page ready */
-window.onload = function() {
+window.onload = () => {
     setTimeout(() => {
-        document.getElementById("loadingScreen").style.opacity = "0";
-        setTimeout(() => {
-            document.getElementById("loadingScreen").style.display = "none";
-        }, 600);
-    }, 1800);
+        const ls = document.getElementById("loadingScreen");
+        ls.style.opacity = "0";
+        setTimeout(() => ls.style.display = "none", 900);
+    }, 2500);
 };
 </script>
 
 </body>
-  </html>
- 
+</html>
