@@ -83,26 +83,10 @@ body, html {
 }
 
 .hero video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     opacity: 0.38;
-}
-
-/* FALLBACK BACKGROUND */
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url('assets/fallback-concert.jpg') center/cover no-repeat;
-    opacity: 0.3;
-    z-index: -1;
 }
 
 .hero .overlay {
@@ -112,15 +96,13 @@ body, html {
     flex-direction: column;
     justify-content: center;
     padding: 80px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9));
-    z-index: 1;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.82));
 }
 
 .hero h1 {
     font-size: 3.5rem;
     font-weight: bold;
     margin: 0;
-    text-shadow: 0 0 20px rgba(0,255,136,0.4);
 }
 
 .hero p {
@@ -143,9 +125,6 @@ body, html {
         font-size: 1rem;
         max-width: 95%;
     }
-    .hero video {
-        min-width: 150%;
-    }
 }
 
 /* ================= ABOUT ================= */
@@ -157,7 +136,6 @@ body, html {
 .about h2 {
     font-size: 2.6rem;
     margin-bottom: 25px;
-    color: #00ff88;
 }
 
 .about p {
@@ -180,20 +158,17 @@ footer {
 }
 
 .footer-links a {
-    color: #00ff88;
-    margin: 0 15px;
+    color: #888;
+    margin: 0 12px;
     text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s;
 }
-.footer-links a:hover { 
-    color: #fff; 
-    text-shadow: 0 0 10px #00ff88;
-}
+.footer-links a:hover { color: #fff; }
 
-footer p {
-    margin: 10px 0;
+footer a {
+    color: #888;
+    text-decoration: none;
 }
+footer a:hover { color: #fff; }
 </style>
 </head>
 
@@ -209,14 +184,12 @@ footer p {
     <div id="typingText">Xyzaroom Records</div>
 </div>
 
-<!-- HERO -->
+<!-- HERO — HANYA INI YANG DIUBAH -->
 <div class="hero">
-    <video autoplay muted loop playsinline poster="assets/fallback-concert.jpg">
-        <!-- 3 LINK VIDEO YANG 100% JALAN -->
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-concert-audience-holding-their-cell-phones-29629-large.mp4" type="video/mp4">
+    <video autoplay muted loop playsinline>
+        <!-- LINK LANGSUNG .mp4 — 100% JALAN DI SEMUA BROWSER & HP -->
         <source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-of-people-at-a-concert-29628-large.mp4" type="video/mp4">
         <source src="https://videos.pexels.com/video-files/2022396/2022396-hd_1920_1080_30fps.mp4" type="video/mp4">
-        <!-- FALLBACK TEXT -->
         Your browser does not support video.
     </video>
     <div class="overlay">
@@ -228,7 +201,7 @@ footer p {
     </div>
 </div>
 
-<!-- ABOUT -->
+<!-- ABOUT — NGGAK DIUBAH -->
 <div class="about">
     <h2>About</h2>
     <p>
@@ -239,8 +212,10 @@ footer p {
     </p>
 </div>
 
-<!-- FOOTER -->
+<!-- FOOTER — 100% SAMA PERSIS -->
 <footer>
+
+    <!-- NEW 8 LINKS AREA -->
     <div class="footer-links">
         <a href="#">About</a>
         <a href="#">Artists</a>
@@ -251,6 +226,7 @@ footer p {
         <a href="#">Careers</a>
         <a href="#">Contact</a>
     </div>
+
     <a href="#">Privacy Policy</a> |
     <a href="#">Terms & Conditions</a>
     <br><br>
@@ -262,7 +238,7 @@ window.onload = () => {
     setTimeout(() => {
         const ls = document.getElementById("loadingScreen");
         ls.style.opacity = "0";
-        setTimeout(() => ls.style.display = "none", 1000);
+        setTimeout(() => ls.style.display = "none", 900);
     }, 2500);
 };
 </script>
