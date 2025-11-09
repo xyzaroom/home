@@ -1,192 +1,226 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>XYZAROOM — Home</title>
-  <link rel="icon" href="/assets/logo.png" />
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      background:#000;color:#fff;font-family:monospace;min-height:100vh;
-      display:flex;flex-direction:column;overflow-x:hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xyzaroom</title>
 
-    /* OVERLAY */
-    .overlay{
-      position:fixed;inset:0;background:#000;
-      display:flex;flex-direction:column;justify-content:center;align-items:center;
-      z-index:9999;transition:opacity .5s,visibility .5s;
-    }
-    .overlay.hidden{opacity:0;visibility:hidden}
-    .typewriter{font-size:26px;letter-spacing:2px;color:#fff;margin-bottom:22px;font-weight:800}
+<style>
+/* ================= GLOBAL STYLE ================= */
+body, html {
+    margin: 0;
+    padding: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
 
-    .cube{
-      width:60px;height:60px;
-      background:linear-gradient(135deg,#fff,#888);
-      transform-style:preserve-3d;
-      animation:rotateCube 2.6s linear infinite;
-    }
-    @keyframes rotateCube{
-      0%{transform:rotateX(0deg) rotateY(0deg)}
-      100%{transform:rotateX(360deg) rotateY(360deg)}
-    }
+/* ================= LOADING SCREEN ================= */
+#loadingScreen {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
-    /* HEADER */
-    header{
-      position:fixed;top:0;left:0;width:100%;padding:16px 5%;
-      display:flex;justify-content:space-between;align-items:center;
-      z-index:80;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);
-    }
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo img{width:50px;height:50px;border-radius:8px;border:1px solid #fff}
-    .toggle{font-size:26px;cursor:pointer;padding:8px;color:#fff}
+.cube {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: spin 2.8s infinite linear;
+}
 
-    /* SIDEBAR */
-    .sidebar{
-      position:fixed;top:70px;left:0;width:260px;bottom:0;
-      background:#111;padding:20px;border-right:1px solid #333;
-      transform:translateX(-100%);transition:.3s;z-index:70;
-    }
-    .sidebar.open{transform:translateX(0)}
-    .sidebar a{
-      display:block;color:#fff;text-decoration:none;font-weight:700;
-      padding:10px;border-radius:6px;margin-bottom:10px;
-    }
-    .sidebar a:hover{background:#fff;color:#000}
+.cube div {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.35);
+}
 
-    /* HERO */
-    .hero{
-      padding-top:120px;padding-bottom:120px;padding-left:5%;padding-right:5%;
-      display:flex;flex-direction:column;gap:26px;
-    }
-    .hero-title{font-size:42px;font-weight:900;line-height:1.3}
-    .hero-sub{font-size:18px;color:#ccc;max-width:550px}
-    .hero-btn{
-      display:inline-block;padding:14px 24px;font-size:16px;font-weight:800;
-      background:#fff;color:#000;border-radius:8px;text-decoration:none;
-      box-shadow:0 0 12px rgba(255,255,255,.2);
-    }
+/* Cube faces */
+.cube .front  { transform: translateZ(30px); }
+.cube .back   { transform: rotateY(180deg) translateZ(30px); }
+.cube .right  { transform: rotateY(90deg)  translateZ(30px); }
+.cube .left   { transform: rotateY(-90deg) translateZ(30px); }
+.cube .top    { transform: rotateX(90deg)  translateZ(30px); }
+.cube .bottom { transform: rotateX(-90deg) translateZ(30px); }
 
-    /* ORNAMENT */
-    .ornament{
-      width:100%;max-width:620px;height:250px;margin-top:30px;
-      background:linear-gradient(135deg,#222,#444);border-radius:16px;
-      box-shadow:0 0 22px rgba(255,255,255,.08);
-    }
+@keyframes spin {
+    from { transform: rotateX(0) rotateY(0); }
+    to   { transform: rotateX(360deg) rotateY(360deg); }
+}
 
-    /* ABOUT */
-    .about{
-      padding:80px 5%;display:flex;flex-direction:column;gap:18px;
-      background:#0a0a0a;border-top:1px solid #222;
-    }
-    .about h2{font-size:30px;font-weight:900}
-    .about p{color:#ccc;font-size:16px;max-width:680px;line-height:1.6}
+/* Typing effect */
+#typingText {
+    margin-top: 25px;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: #e0e0e0;
+    border-right: 2px solid #fff;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(30) forwards, blink 0.7s infinite;
+}
 
-    /* FOOTER */
-    footer{
-      background:#050505;padding:30px;text-align:center;
-      border-top:1px solid #222;margin-top:40px;
-    }
-    .social a{
-      color:#fff;margin:0 8px;text-decoration:none;font-size:20px;
-    }
-    .social a:hover{opacity:.7}
+@keyframes typing {
+    from { width: 0; }
+    to   { width: 240px; }
+}
 
-    @media(max-width:700px){
-      .hero-title{font-size:32px}
-      .ornament{height:180px}
-    }
-  </style>
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* ================= HEADER HERO ================= */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+
+.hero video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+}
+
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.65), rgba(0,0,0,0.75));
+}
+
+.hero h1 {
+    font-size: 3.8rem;
+    margin: 0;
+    font-weight: bold;
+}
+
+.hero p {
+    max-width: 450px;
+    font-size: 1.2rem;
+    line-height: 1.6em;
+    margin-top: 20px;
+    color: #ddd;
+}
+
+/* ================= ABOUT SECTION ================= */
+.about {
+    padding: 80px 40px;
+    background: #111;
+}
+
+.about h2 {
+    font-size: 2.7rem;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+.about p {
+    font-size: 1.1rem;
+    max-width: 800px;
+    color: #ccc;
+    line-height: 1.7rem;
+}
+
+/* ================= FOOTER ================= */
+footer {
+    padding: 40px;
+    background: #0a0a0a;
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #888;
+    margin: 0 10px;
+    text-decoration: none;
+}
+footer a:hover {
+    color: #fff;
+}
+</style>
 </head>
+
 <body>
 
-<!-- OVERLAY -->
-<div class="overlay" id="overlay">
-  <div class="typewriter" id="typeText"></div>
-  <div class="cube"></div>
+<!-- LOADING SCREEN -->
+<div id="loadingScreen">
+    <div class="cube">
+        <div class="front"></div>
+        <div class="back"></div>
+        <div class="right"></div>
+        <div class="left"></div>
+        <div class="top"></div>
+        <div class="bottom"></div>
+    </div>
+
+    <div id="typingText">Xyzaroom Records</div>
 </div>
 
-<!-- HEADER -->
-<header>
-  <div class="logo">
-    <img src="/assets/logo.png" alt="">
-    <div><b>XYZAROOM</b><div style="font-size:12px;color:#aaa">Records</div></div>
-  </div>
-  <div class="toggle" id="toggleBtn">☰</div>
-</header>
-
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
-  <a href="/">Homepage</a>
-  <a href="/p/about.html">About</a>
-  <a href="/p/artists.html">Artists</a>
-  <a href="/p/albums.html">Albums</a>
-  <a href="/p/event.html">Event</a>
-  <a href="/p/contact.html">Contact</a>
-</aside>
-
 <!-- HERO SECTION -->
-<section class="hero">
-  <div class="hero-title">
-    Empowering Independent <br>
-    Artists & Music Creators.
-  </div>
-  <div class="hero-sub">
-    XYZAROOM RECORDS hadir sebagai wadah kreator musik Indonesia yang ingin merilis karya secara independen dengan dukungan penuh, distribusi global, dan identitas artistik yang kuat.
-  </div>
-  <a class="hero-btn" href="/p/about.html">Get Started</a>
+<div class="hero">
+    <video autoplay muted loop>
+        <source src="YOUR_VIDEO_URL.mp4" type="video/mp4">
+    </video>
 
-  <div class="ornament"></div>
-</section>
+    <div class="overlay">
+        <h1>Music Distribution<br>For New Era Artists</h1>
+        <p>
+            Independent label support, innovative release tools,  
+            and global publishing management — all tailored for modern creators.
+        </p>
+    </div>
+</div>
 
-<!-- ABOUT -->
-<section class="about">
-  <h2>Tentang XYZAROOM</h2>
-  <p>
-    XYZAROOM adalah label independen yang berfokus pada produksi, manajemen kreatif, dan distribusi digital untuk musisi yang ingin berkembang secara profesional. 
-    Kami menyediakan lingkungan kreatif, sistem yang fleksibel, dan akses penuh ke jaringan distribusi global.
-  </p>
-</section>
+<!-- ABOUT SECTION -->
+<div class="about">
+    <h2>About Xyzaroom</h2>
+    <p>
+        Xyzaroom adalah layanan musik independen yang memberikan solusi  
+        untuk artist, producer, dan label dalam merilis musik ke seluruh dunia.  
+        Sistem kami dirancang futuristik, cepat, aman, dan memberikan kontrol penuh  
+        pada setiap tahap distribusi.
+    </p>
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="social">
-    <a href="#">📸</a>
-    <a href="#">▶️</a>
-    <a href="#">🎧</a>
-    <a href="#">♪</a>
-    <a href="#">✖</a>
-    <a href="#">🌐</a>
-  </div>
-  <p style="color:#777;margin-top:10px">© 2025 XYZAROOM RECORDS — All Rights Reserved.</p>
+    <a href="#">Privacy Policy</a> | 
+    <a href="#">Terms & Conditions</a>
+    <br><br>© 2025 Xyzaroom Records
 </footer>
 
 <script>
-  const overlay=document.getElementById('overlay');
-  const typeText=document.getElementById('typeText');
-  const fullText="XYZAROOM RECORDS";
-  let idx=0;
-
-  function typeWrite(){
-    if(idx<=fullText.length){
-      typeText.innerText=fullText.slice(0,idx);
-      idx++;
-      setTimeout(typeWrite,70);
-    } else {
-      setTimeout(()=>overlay.classList.add('hidden'),200);
-    }
-  }
-  document.addEventListener("DOMContentLoaded",()=>{setTimeout(typeWrite,150)});
-
-  /* Sidebar */
-  const btn=document.getElementById("toggleBtn");
-  const side=document.getElementById("sidebar");
-  btn.onclick=()=>side.classList.toggle("open");
-  document.addEventListener("click",(e)=>{
-    if(!side.contains(e.target) && !btn.contains(e.target)){ side.classList.remove("open"); }
-  });
+/* Remove loading screen after page ready */
+window.onload = function() {
+    setTimeout(() => {
+        document.getElementById("loadingScreen").style.opacity = "0";
+        setTimeout(() => {
+            document.getElementById("loadingScreen").style.display = "none";
+        }, 600);
+    }, 1800);
+};
 </script>
 
 </body>
-</html>
+  </html>
+ 
