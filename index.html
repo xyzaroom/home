@@ -144,31 +144,69 @@ body, html {
     color: #ccc;
 }
 
-/* ================= FOOTER ================= */
-footer {
-    padding: 50px 20px;
-    background: #0a0a0a;
-    color: #888;
+/* ================= DITTO FOOTER REPLIKA ================= */
+.ditto-footer {
+    background: #000;
+    color: #fff;
+    padding: 60px 5% 30px;
+    font-family: Arial, sans-serif;
+}
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+}
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 20px 0;
+}
+.footer-column h4 {
+    color: #39ff14;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+.footer-column a {
+    display: block;
+    color: #aaa;
+    margin: 10px 0;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.footer-column a:hover {
+    color: #39ff14;
+}
+.footer-bottom {
     text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 30px;
+}
+.social-icons a {
+    color: #39ff14;
+    margin: 0 15px;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+.footer-bottom p {
+    margin: 20px 0;
+    color: #666;
     font-size: 0.9rem;
 }
-
-.footer-links {
-    margin-bottom: 25px;
-}
-
-.footer-links a {
-    color: #888;
-    margin: 0 12px;
+.legal-links a {
+    color: #666;
+    margin: 0 15px;
+    font-size: 0.9rem;
     text-decoration: none;
 }
-.footer-links a:hover { color: #fff; }
-
-footer a {
-    color: #888;
-    text-decoration: none;
+.legal-links a:hover {
+    color: #39ff14;
 }
-footer a:hover { color: #fff; }
+@media (max-width: 768px) {
+    .footer-container { flex-direction: column; text-align: center; }
+}
 </style>
 </head>
 
@@ -184,10 +222,10 @@ footer a:hover { color: #fff; }
     <div id="typingText">Xyzaroom Records</div>
 </div>
 
-<!-- HERO — HANYA VIDEO YANG DIPERBAIKI -->
+<!-- HERO — VIDEO BARU DARI PEXELS KAMU -->
 <div class="hero">
     <video autoplay muted loop playsinline>
-        <source src="https://cdn.xyza.rocks/video-musician-bright.mp4" type="video/mp4">
+        <source src="https://videos.pexels.com/video-files/7722221/7722221-hd_1920_1080_30fps.mp4" type="video/mp4">
         Your browser does not support video.
     </video>
     <div class="overlay">
@@ -210,25 +248,48 @@ footer a:hover { color: #fff; }
     </p>
 </div>
 
-<!-- FOOTER -->
-<footer>
-
-    <!-- NEW 8 LINKS AREA -->
-    <div class="footer-links">
-        <a href="#">About</a>
-        <a href="#">Artists</a>
-        <a href="#">Releases</a>
-        <a href="#">Publishing</a>
-        <a href="#">Partners</a>
-        <a href="#">Support</a>
-        <a href="#">Careers</a>
-        <a href="#">Contact</a>
+<!-- FOOTER DITTO MUSIC REPLIKA -->
+<footer class="ditto-footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+      <a href="#">News</a>
+      <a href="#">Contact</a>
     </div>
-
-    <a href="#">Privacy Policy</a> |
-    <a href="#">Terms & Conditions</a>
-    <br><br>
-    © 2025 Xyzaroom Records
+    <div class="footer-column">
+      <h4>Services</h4>
+      <a href="#">Music Distribution</a>
+      <a href="#">Playlist Pitching</a>
+      <a href="#">Sync Licensing</a>
+      <a href="#">Publishing</a>
+      <a href="#">Xyzaroom Plus</a>
+    </div>
+    <div class="footer-column">
+      <h4>Resources</h4>
+      <a href="#">Help Center</a>
+      <a href="#">Blog</a>
+      <a href="#">Pricing</a>
+      <a href="#">Free Sign Up</a>
+      <a href="#">Login</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="social-icons">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">X</a>
+      <a href="#">YouTube</a>
+      <a href="#">TikTok</a>
+    </div>
+    <p>© 2025 Xyzaroom Records Inc. All rights reserved.</p>
+    <div class="legal-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+    </div>
+  </div>
 </footer>
 
 <script>
